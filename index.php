@@ -1,5 +1,26 @@
 <?php
 include('simple_html_dom.php');
+
+//gettting the website url
+ /*error occur had to  remove $offset in file simple_html_dom.php on line 75
+ for file_get_html to work */
+ $html = file_get_html("https://www.newsmax.com/newsfront/");
+ // echo($html);
+ foreach($html->find('li[class="article_link"]') as $postDiv){
+      foreach($postDiv->find('a') as $element) {
+         $title = strip_tags($element->plaintext);
+         $links= $element->href;
+         //print($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>"."<br>");
+         //$myfile = fopen("newsScraped.txt", "w") ;
+         $txt = $title . "\n" . "https://www.newsmax.com/newsfront".$links. "\n". "\n";
+         //LOCK_EX flag to prevent anyone else writing to the file at the same time
+         file_put_contents('newsScraped.txt', $txt, FILE_APPEND | LOCK_EX);
+         //fwrite($myfile, "\n". $txt);
+         //fclose($myfile); 
+     }   
+  }
+
+
 // //base url
 // $base = 'https://www.newsmax.com/newsfront/';
 
@@ -31,17 +52,3 @@ include('simple_html_dom.php');
 
 
 
-
- //gettting the website url
- /*error occur had to  remove $offset in file simple_html_dom.php on line 75
- for file_get_html to work */
-  $html = file_get_html("https://www.newsmax.com/newsfront/");
-// echo($html);
-foreach($html->find('li[class="article_link"]') as $postDiv){
-    
-     foreach($postDiv->find('a') as $element) {
-        $title = strip_tags($element->plaintext);
-        $links= $element->href;
-        echo($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>"."<br>");
-    }
- }
