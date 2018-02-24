@@ -42,6 +42,6 @@ foreach($html->find('li[class="article_link"]') as $postDiv){
      foreach($postDiv->find('a') as $element) {
         $title = strip_tags($element->plaintext);
         $links= $element->href;
-     //   echo($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>");
+        echo($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>"."<br>");
     }
  }
