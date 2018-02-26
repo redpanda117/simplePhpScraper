@@ -10,7 +10,7 @@ include('simple_html_dom.php');
       foreach($postDiv->find('a') as $element) {
          $title = strip_tags($element->plaintext);
          $links= $element->href;
-         //print($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>"."<br>");
+         //print_r($title . "<br>" . "https://www.newsmax.com/newsfront".$links . "<br>"."<br>");
          //$myfile = fopen("newsScraped.txt", "w") ;
          $txt = $title . "\n" . "https://www.newsmax.com/newsfront".$links. "\n". "\n";
          //LOCK_EX flag to prevent anyone else writing to the file at the same time
@@ -40,11 +40,12 @@ include('simple_html_dom.php');
 // $html_base->load($str);
 
 //get all category links
-// foreach($html_base->getElementById("copy_small") as $element) {
+// foreach($html_base->find('li[class="article_link"]') as $postDiv) {
+//   foreach($postDiv->find('a') as $element) {
 //     echo "<pre>";
-//     var_dump($element);
-//     //var_dump( "https://www.newsmax.com/newsfront" . $element->href);
+//     print_r( "https://www.newsmax.com/newsfront" . $element->href );
 //     echo "</pre>";
+//   }
 // }
 
 // $html_base->clear(); 
